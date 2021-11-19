@@ -47,6 +47,32 @@ def get_last_report_id():
 
     return last_report_id + 1
 
+@app.route('/index')
+def all_entries():
+
+    
+    all_links = collection.find({})
+    
+    result = []
+    for data in all_links:
+        del data['_id']
+        result.append(data)
+        
+    
+    return render_template('index.html', result = result)
+    
+
+@app.route("/review/<report_id>", methods=['GET'])
+
+def get_info(report_id):
+    
+    all_links = collection.find_one({'report_id': int(report_id)})
+    
+    return render_template('display.html' , result = all_links )
+
+    
+
+
 
 
 if __name__ == "__main__":
