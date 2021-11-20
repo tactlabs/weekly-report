@@ -62,18 +62,19 @@
                 <span class="nav-link-text" style="font-size: large;">Menu</span>
               </a>
             </li>
-          <li class="nav-item">
-              <a class="nav-link" href="/index">
-                <i class="ni ni-like-2 text-default"></i>
-                <span class="nav-link-text">All Entries</span>
-              </a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="ni ni-like-2 text-default"></i>
                 <span class="nav-link-text">Report</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/entries">
+                <i class="ni ni-like-2 text-default"></i>
+                <span class="nav-link-text">All Entries</span>
+              </a>
+            </li>
+
           </ul>
           
           <!-- Navigation -->
@@ -165,7 +166,7 @@
                     <thead class="thead-light">
 
                       <tr style="-webkit-column-break-after: right; border-collapse:separate;">
-                        <th style="font-size: large; width: 40%; font-weight: bold;">DESCRIPTION</th>
+                        <th style="font-size: large; width: 30%; font-weight: bold;">DESCRIPTION</th>
                         <th style="font-size: large; font-weight: bold;">SCORE</th>
                       </tr>
                       
@@ -176,7 +177,7 @@
                       </tr>
                       <tr>
                         <td style="font-weight: bold; padding: 30px; font-size: 18px;">Rating</td>
-                        <td><input type="number" id="input-first-name" class="form-control" placeholder="Your score"
+                        <td><input type="number" id="input-first-name" class="form-control" placeholder="Enter score"
                             name="rating"></td>
                       </tr>
                       <tr>
@@ -184,6 +185,17 @@
                         <td><textarea id="input-first-name" class="form-control" name="review_d" rows="4" cols="100" placeholder="Comment here"></textarea>            
                         </td>
                       </tr>
+                      <tr>
+                        <td style="font-weight: bold; padding: 30px; font-size: 18px;">Reviewer </td>
+                        <td><input type="text" id="input-first-name" class="form-control" placeholder="Enter Name of Reviewer"
+                            name="reviewer_name"></td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: bold; padding: 30px; font-size: 18px;">Date of Review</td>
+                        <td><input type="date" id="input-first-name" class="form-control" placeholder="Enter date of Review"
+                            name="date"></td>
+                      </tr>
+
 
                     </thead>
                   </table>

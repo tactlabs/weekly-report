@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Whizlabs_Content</title>
+  <title>Featurepreneur:Weekly Intern Report</title>
   <!-- Favicon -->
   <link rel="icon" href="../static/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
@@ -28,7 +28,17 @@
   <link rel="stylesheet" href="../static/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../static/css/argon.css?v=1.2.0" type="text/css">
-</head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+  <script
+src="http://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script></head>
 
 <body>
   <!-- Sidenav -->
@@ -62,22 +72,21 @@
                   <span class="nav-link-text" style="font-size: large;">Menu</span>
                 </a>
               </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/index">
-                  <i class="ni ni-like-2 text-default"></i>
-                  <span class="nav-link-text">All Entries</span>
-                </a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" href="/">
                   <i class="ni ni-like-2 text-default"></i>
                   <span class="nav-link-text">Report</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/entries">
+                  <i class="ni ni-like-2 text-default"></i>
+                  <span class="nav-link-text">All Entries</span>
+                </a>
+              </li>
+
           </ul>
-          <!-- Divider -->
-          <hr class="my-3">
-          <!-- Heading -->
+          
           <!-- Navigation -->
         </div>
       </div>
@@ -125,7 +134,7 @@
     <!-- Header -->
 
     <div class="header pb-10 d-flex align-items-center"
-      style="min-height: 90px; background-size: 200px; background-position: center right;">
+      style="min-height: 100px; background-size: 200px; background-position: center right;">
       <span class="mask bg-gradient-default opacity-8"></span>
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
@@ -139,42 +148,67 @@
       </div>
     </div>
     <div class="card-body">
-    <p style="text-align: center; color:darkslateblue; font-size: 40px;">Intern's Report </p>
-
-
-      <div class="pl-lg-4">
+      <p style="text-align: center; color:darkslateblue; font-size: 35px;">Interns Weekly Reports</p>
+      <div class="pl-lg-1">
         <div class="row">
-          <div class="col-lg-12">
-            {%  if result %}
-
+          <div class="col-lg-6">
             <div class="form-group">
-              
-              <h3 style="font-size: 25px;">Intern ID</h3>
-              <h2 style="font-size: larger;" type="text" class="form-control" name="title"> {{result['intern_id']}} </h2>
-
-              <br>
-              <br>
-              <h3 style="font-size: 25px;">Rating</h3>
-              <h2 style="font-size: larger;" type="text" class="form-control" name="title"> {{result['rating']}} </h2>
-
-              <h3 style="font-size: 25px;">Comments</h3>
-              <textarea style="font-size: large; " id="review" name="content" class="form-control" rows="5" cols="100">{{result['comments']}}</textarea>
-
-              <br>
-              <br>
-
-                
-
-
-              <br>
-              
+            
             </div>
-            {% endif %}
 
           </div>
         </div>
       </div>
-      <hr class="my-4" />
+     
+        <div class="pl-lg-5">
+          <div class="row">
+            <div class="col-lg-12">
+            <div class="container">
+
+              <div class="form-group">
+                <div class="table-responsive">
+                  <table  class="table table-fluid" id="Table"
+                    style="border-collapse:initial; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); ">
+                    <thead class="thead-light">
+          
+                                <tr style="-webkit-column-break-after: right; align-items: center; border-collapse:separate;">
+                                  <th style="font-size: large; font-weight: bold;">Intern Id</th>
+                                  <th style="font-size: large; font-weight: bold;">Rating</th>
+                                  <th style="font-size: large; font-weight: bold;">Comments</th>
+                                  <th style="font-size: large; font-weight: bold;">Reviewer</th>
+                                  <th style="font-size: large; font-weight: bold;">Reviewed On</th>
+                                </tr>
+                                {% for i in result %}
+
+                                <tr>
+                                <td style="font-weight: bold;  padding: 30px; font-size: 18px;">{{i['intern_id']}}</td>                                
+                                <td style="font-weight: light; padding: 30px; font-size: 18px;">{{i['rating']}}</td>
+                                <td style="font-weight: light; padding: 30px; font-size: 18px;">{{i['comments']}}</td>
+                                <td style="font-weight: light; padding: 30px; font-size: 18px;">{{i['reviewer_name']}} </td>
+                                <td style="font-weight: light; padding: 30px; font-size: 18px;">{{i['date']}}</td>
+                                </tr>
+          
+                                {% endfor %}
+
+                              </thead>
+                            </table>
+                        </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <script>
+                        $(document).ready( function () {
+                        $('#Table').DataTable();
+                    } );
+                        </script>
+                    
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <!-- Footer -->
       <footer class="footer pt-0">
@@ -212,6 +246,7 @@
       <script src="../static/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
       <!-- Argon JS -->
       <script src="../static/js/argon.js?v=1.2.0"></script>
+      
 </body>
 
 </html>

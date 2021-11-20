@@ -25,14 +25,17 @@ score = db['report']
 @app.route("/", methods=["GET", "POST"])
 def submit():
     
-    intern       = request.form.get('intern_id')
-    rating        = request.form.get('rating')
-    comments      = request.form.get('review_d')
-
+    intern              = request.form.get('intern_id')
+    rating              = request.form.get('rating')
+    comments            = request.form.get('review_d')
+    reviewer_name       = request.form.get('reviewer_name')
+    date                = request.form.get('date')
+ 
     
     new_report_id = get_last_report_id()
+    
     collection.insert_one(
-        {'intern_id': intern, 'rating': rating, 'comments': comments, 'report_id':new_report_id })
+        {'intern_id': intern, 'rating': rating, 'comments': comments, 'reviewer_name': reviewer_name, 'date': date, 'report_id':new_report_id })
 
     
     return render_template('review.html')
@@ -47,7 +50,9 @@ def get_last_report_id():
 
     return last_report_id + 1
 
-@app.route('/index')
+
+
+@app.route('/entries')
 def all_entries():
 
     
@@ -59,7 +64,7 @@ def all_entries():
         result.append(data)
         
     
-    return render_template('index.html', result = result)
+    return render_template('entries.html', result = result)
     
 
 @app.route("/review/<report_id>", methods=['GET'])
