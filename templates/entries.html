@@ -38,7 +38,7 @@ src="http://code.jquery.com/jquery-3.3.1.min.js"
 integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script></head>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
 
 <body>
   <!-- Sidenav -->
@@ -163,12 +163,10 @@ crossorigin="anonymous"></script>
         <div class="pl-lg-5">
           <div class="row">
             <div class="col-lg-12">
-            <div class="container">
+            <!-- <div class="container"> -->
 
               <div class="form-group">
-                <div class="table-responsive">
-                  <table  class="table table-fluid" id="Table"
-                    style="border-collapse:initial; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); ">
+                  <table  class="table table-fluid" id="myTable" style="border-collapse:initial; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); ">
                     <thead class="thead-light">
           
                                 <tr style="-webkit-column-break-after: right; align-items: center; border-collapse:separate;">
@@ -200,15 +198,45 @@ crossorigin="anonymous"></script>
                     
                     <script>
                         $(document).ready( function () {
-                        $('#Table').DataTable();
+                        $('#myTable').DataTable();
                     } );
                         </script>
-                    
             </div>
           </div>
         </div>
       </div>
 
+<!-- previous page -->
+{% if result.has_prev %}
+<li>
+    <a href="{{ url_for('entries', page=result.prev_num) }}">Previous</a>
+</li>
+{% endif %}
+
+<!-- all page numbers -->
+{% for page_num in result.iter_pages() %}
+    {% if page_num %}
+        {% if page_num != result.page %}
+            <li>
+                <a href="{{ url_for('entries', page=page_num) }}">{{ page_num }}</a>
+            </li>
+        {% else %}
+            <li class="active">
+                <a href="#">{{ page_num }}</a>
+            </li>
+        {% endif %}
+   {% else %}
+       <li>
+           <span class="ellipsis" style="overflow: hidden; text-overflow: ellipsis">…</span>
+       </li>
+   {% endif %}
+{% endfor %}
+
+<!-- next page -->
+{% if result.has_next %}
+<li>
+    <a href="{{ url_for('entries', page=result.next_num) }}">Next</a></li>
+{% endif %}
 
       <!-- Footer -->
       <footer class="footer pt-0">
