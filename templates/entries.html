@@ -176,7 +176,16 @@ crossorigin="anonymous"></script>
                                   <th style="font-size: large; font-weight: bold;">Reviewer</th>
                                   <th style="font-size: large; font-weight: bold;">Reviewed On</th>
                                 </tr>
-                                {% for i in result %}
+                                <div>
+        
+                                  {% if result.prev_page!= None %}
+                                  <a href="/entries?page={{result.current_page - 1}}">
+                                      &lt;&lt; Prev
+                                  </a>
+                                  {% endif %}
+                              
+                              </div>
+                                {% for i in data %}
 
                                 <tr>
                                 <td style="font-weight: bold;  padding: 30px; font-size: 18px;">{{i['intern_id']}}</td>                                
@@ -207,36 +216,19 @@ crossorigin="anonymous"></script>
       </div>
 
 <!-- previous page -->
-{% if result.has_prev %}
-<li>
-    <a href="{{ url_for('entries', page=result.prev_num) }}">Previous</a>
-</li>
+{% if result %}
+                
+
+<div  style="margin-left: 100rem;">
+{% if result.next_page!= None %}
+
+    <a href="/entries?page={{result.current_page + 1}}">
+        Next &gt;&gt;
+    </a>
+{% endif %}
 {% endif %}
 
-<!-- all page numbers -->
-{% for page_num in result.iter_pages() %}
-    {% if page_num %}
-        {% if page_num != result.page %}
-            <li>
-                <a href="{{ url_for('entries', page=page_num) }}">{{ page_num }}</a>
-            </li>
-        {% else %}
-            <li class="active">
-                <a href="#">{{ page_num }}</a>
-            </li>
-        {% endif %}
-   {% else %}
-       <li>
-           <span class="ellipsis" style="overflow: hidden; text-overflow: ellipsis">…</span>
-       </li>
-   {% endif %}
-{% endfor %}
-
-<!-- next page -->
-{% if result.has_next %}
-<li>
-    <a href="{{ url_for('entries', page=result.next_num) }}">Next</a></li>
-{% endif %}
+</div>
 
       <!-- Footer -->
       <footer class="footer pt-0">

@@ -51,20 +51,74 @@ def get_last_report_id():
     return last_report_id + 1
 
 
+def get_page(request):
+
+    page = request.values.get("page")
+
+    if(not page):
+        page = "1"
+
+    page = int(page) 
+
+    return page
 
 @app.route('/entries')
 def all_entries():
 
+    page_size = 10
     
-    all_links = collection.find({})
+    starting_id = collection.find().sort('_id', pymongo.ASCENDING)
+
+    page_no = get_page(request)
+
+    try:
+        last_id = starting_id[(page_no - 1) * page_size]['_id']
+    except:
+        None
     
+    all_links = collection.find({
+        '_id':{'$gte':last_id}
+    }).sort('_id', pymongo.ASCENDING).limit(page_size)
+
     result = []
+
     for data in all_links:
         del data['_id']
         result.append(data)
-        
     
-    return render_template('entries.html', result = result)
+    try:
+    
+        last_id = starting_id[(page_no * page_size)+1]['_id']
+
+        next_page = page_no + 1 
+       
+
+    except:
+        next_page = None
+
+    if(page_no == 1):
+        prev_page = None
+
+    else:
+        prev_page = page_no - 1
+
+    result_data = {
+        "result"            : result,
+        "current_page"      : page_no,
+        "next_page"         : next_page,
+        "prev_page"         : prev_page
+    }       
+
+    if("result" in result_data):
+
+        result_data["result"] = result
+        
+    else:
+        result_data = {}
+        
+        result_data["current_page"] = 1
+    
+    return render_template('entries.html', result = result_data, data = result_data["result"])
     
 
 @app.route("/review/<report_id>", methods=['GET'])
