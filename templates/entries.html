@@ -160,7 +160,7 @@ crossorigin="anonymous"></script>
         </div>
       </div>
      
-        <div class="pl-lg-5">
+        <div class="pl-lg-4">
           <div class="row">
             <div class="col-lg-12">
             <!-- <div class="container"> -->
@@ -176,15 +176,6 @@ crossorigin="anonymous"></script>
                                   <th style="font-size: large; font-weight: bold;">Reviewer</th>
                                   <th style="font-size: large; font-weight: bold;">Reviewed On</th>
                                 </tr>
-                                <div>
-        
-                                  {% if result.prev_page!= None %}
-                                  <a href="/entries?page={{result.current_page - 1}}">
-                                      &lt;&lt; Prev
-                                  </a>
-                                  {% endif %}
-                              
-                              </div>
                                 {% for i in data %}
 
                                 <tr>
@@ -198,38 +189,47 @@ crossorigin="anonymous"></script>
                                 {% endfor %}
 
                               </thead>
+
+                              
                             </table>
+                            
                         </div>
                           </div>
                         </div>
+                        
                       </div>
                     </div>
                     
-                    <script>
-                        $(document).ready( function () {
-                        $('#myTable').DataTable();
-                    } );
-                        </script>
             </div>
           </div>
         </div>
       </div>
 
-<!-- previous page -->
-{% if result %}
+      {% if result %}
                 
+<div style="margin-left: 25rem;float: left;">
+        
+  {% if result.prev_page!= None %}
+  <a href="/entries?page={{result.current_page - 1}}" style="color: black;">
+      &lt;&lt; Previous Page
+  </a>
+  {% endif %}
+
+</div>
 
 <div  style="margin-left: 100rem;">
 {% if result.next_page!= None %}
 
-    <a href="/entries?page={{result.current_page + 1}}">
-        Next &gt;&gt;
+    <a href="/entries?page={{result.current_page + 1}}" style="color:black;">
+        Next Page &gt;&gt;
     </a>
 {% endif %}
-{% endif %}
-
 </div>
+{% endif %}
+<br>
 
+<br>
+<br>
       <!-- Footer -->
       <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
